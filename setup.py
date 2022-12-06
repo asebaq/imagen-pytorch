@@ -27,9 +27,10 @@ setup(
   ],
   install_requires=[
     'accelerate',
+    'beartype',
     'click',
     'datasets',
-    'einops>=0.4',
+    'einops>=0.6',
     'einops-exts',
     'ema-pytorch>=0.0.3',
     'fsspec',
