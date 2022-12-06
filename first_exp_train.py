@@ -1,5 +1,17 @@
 import torch
 from imagen_pytorch import Unet, Imagen, ImagenTrainer
+import torchvision
+from PIL import Image
+import os
+import numpy as np
+
+
+def save_images(images, path, **kwargs):
+    grid = torchvision.utils.make_grid(images, **kwargs)
+    ndarr = grid.permute(1, 2, 0).to('cpu').numpy()
+    ndarr = np.uint8(255*ndarr)
+    im = Image.fromarray(ndarr)
+    im.save(path)
 
 
 def main():
@@ -61,7 +73,8 @@ def main():
         'the milky way galaxy in the style of monet'
     ], cond_scale=3.)
 
-    images.shape  # (2, 3, 256, 256)
+    print(images.shape)  # (3, 3, 256, 256)
+    save_images(images, os.path.join('./results.jpg'))
 
 
 if __name__ == '__main__':
